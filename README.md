@@ -6,12 +6,14 @@ Demo Booking is App For Booking  Cars with Map
 - [x] Kotlin
 - [x] Kotlin Coroutines
 - [x] MVVM Architecture
-- [x] Firebase(Firestore)
+- [x] Firebase (Firestore)
 - [x] Repository Design Pattern
 - [x] DI(Hilt)
 - [x] View Binding
 - [x] Navigation Components
 - [x] Google Material Design
+- [x] Google Map
+
  
 ## Report Bug / Issue / Improvement
 * Please feel free to report bug , issue or improvement - see the [Issues](https://github.com/YasserAdel564/BookingDemo/issues) section fisrt to prevent duplicates. Also, if you know how to fix this issue please feel free to fork this repo and make a pull request and i will gladly review and merge and add you as a contributer :)
