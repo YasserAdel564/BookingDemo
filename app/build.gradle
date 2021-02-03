@@ -1,0 +1,92 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "com.booking.app"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('key.jks')
+            storePassword "key12345"
+            keyPassword "key12345"
+            keyAlias 'key'
+        }
+    }
+
+    buildTypes {
+        debug {
+            initWith debug
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            shrinkResources false
+            minifyEnabled false
+            debuggable false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        android.applicationVariants.all { variant ->
+            variant.outputs.all {
+                outputFileName = "Booking-${variant.buildType.name}-v${variant.versionCode}.apk"
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.core:core-ktx:$kotlinKtxVersion"
+    implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    testImplementation "junit:junit:$junit"
+    androidTestImplementation "androidx.test.ext:junit:$extjunit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
+    //noinspection LifecycleAnnotationProcessorWithJava8
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation"
+    implementation "com.google.android.material:material:$material_version"
+    implementation("com.github.bumptech.glide:glide:$glide_version") { exclude group: "com.android.support" }
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+    implementation "com.blankj:utilcode:$blankj_version"
+    implementation "com.google.dagger:hilt-android:$hilt_android"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_compiler"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_viewModel"
+    kapt "androidx.hilt:hilt-compiler:$hilt_viewModel"
+    implementation "com.airbnb.android:lottie:$lottie"
+    implementation "com.google.android.gms:play-services-maps:$gMaps"
+    implementation "de.hdodenhof:circleimageview:$circle_image"
+
+}
+

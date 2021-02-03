@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Booking</string>
+
+    <string name="splash_label">Splash</string>
+    <string name="home_label">Home</string>
+    <string name="dialog_label">Dialog</string>
+
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="login">Login</string>
+
+
+</resources>
