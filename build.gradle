@@ -8,11 +8,11 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.2"
+        //noinspection DifferentKotlinGradleVersion
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$navigationsafe"
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.28-alpha'
         classpath 'com.google.gms:google-services:4.3.5'
-
     }
 }
 
@@ -20,6 +20,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://jitpack.io' }
     }
 }
 
@@ -48,4 +49,9 @@ ext {
     lottie = '3.4.2'
     gMaps = '17.0.0'
     circle_image = '3.1.0'
+    firebase_auth = '20.0.2'
+    firebase_firestore = '22.0.2'
+    firebase_messaging = '21.0.1'
+    draw_route ='1.0'
+    rxjava ='3.0.0'
 }

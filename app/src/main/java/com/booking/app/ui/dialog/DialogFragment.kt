@@ -7,25 +7,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.booking.app.R
+import com.booking.app.databinding.DialogFragmentBinding
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class DialogFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = DialogFragment()
-    }
+class DialogFragment : BottomSheetDialogFragment() {
 
     private lateinit var viewModel: DialogViewModel
+    lateinit var binding: DialogFragmentBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.dialog_fragment, container, false)
+    ): View {
+        binding = DialogFragmentBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(DialogViewModel::class.java)
     }
+
+    override fun getTheme(): Int = R.style.BottomSheetDialog
 
 }

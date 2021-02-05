@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splash_fragment">
+    app:startDestination="@id/home_fragment">
 
     <fragment
         android:id="@+id/splash_fragment"
@@ -24,5 +24,19 @@
         android:id="@+id/home_fragment"
         android:name="com.booking.app.ui.home.HomeFragment"
         android:label="@string/home_label"
-        tools:layout="@layout/home_fragment"/>
+        tools:layout="@layout/home_fragment">
+        <action
+            android:id="@+id/action_home_fragment_to_dialog_fragment"
+            app:destination="@id/dialog_fragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/fade"
+            app:popUpTo="@id/home_fragment" />
+    </fragment>
+
+
+    <dialog
+        android:id="@+id/dialog_fragment"
+        android:name="com.booking.app.ui.dialog.DialogFragment"
+        android:label="@string/dialog_label"
+        tools:layout="@layout/dialog_fragment" />
 </navigation>

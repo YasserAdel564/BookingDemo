@@ -16,7 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 class SplashFragment : Fragment() {
 
-
     lateinit var binding: SplashFragmentBinding
     var timer: CountDownTimer? = null
 

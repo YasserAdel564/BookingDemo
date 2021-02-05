@@ -1,13 +1,15 @@
 <resources>
     <string name="app_name">Booking</string>
-
+    <string name="google_map_api_key">AIzaSyAooCh9x5eRQLVv2SoMM0P8iFerZCvDtuE</string>
     <string name="splash_label">Splash</string>
     <string name="home_label">Home</string>
     <string name="dialog_label">Dialog</string>
-
     <string name="home">Home</string>
     <string name="profile">Profile</string>
     <string name="login">Login</string>
+    <string name="pick_up">Pick Up From</string>
+    <string name="accept">Accept</string>
+    <string name="reject">Reject</string>
 
 
 </resources>

@@ -11,4 +11,10 @@
         <item name="fontFamily">@font/thesans_plain</item>
         <item name="android:navigationBarColor">@color/colorPrimary</item>
     </style>
+
+    <style name="BottomSheetDialog" parent="@style/Theme.Design.BottomSheetDialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="background">@color/colorPrimary</item>
+    </style>
 </resources>

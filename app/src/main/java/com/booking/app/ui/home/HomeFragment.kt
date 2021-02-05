@@ -1,32 +1,36 @@
 package com.booking.app.ui.home
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.booking.app.R
 import com.booking.app.databinding.HomeFragmentBinding
-import com.booking.app.databinding.SplashFragmentBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.*
 import com.google.android.material.navigation.NavigationView
 
+
+
 class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener,
-    OnMapReadyCallback {
+    OnMapReadyCallback, GoogleMap.OnPolylineClickListener  {
 
     lateinit var binding: HomeFragmentBinding
     private lateinit var mMap: GoogleMap
 
+    private val viewModel by lazy {
+        ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +45,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         val mapFragment = childFragmentManager.findFragmentById(R.id.map_host) as SupportMapFragment
         mapFragment.getMapAsync(this)
         binding.navViewHome.setNavigationItemSelectedListener(this)
+        viewModel.checkRequests("")
 
     }
 
@@ -51,9 +56,17 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        val qatar = LatLng(25.266062664532356, 51.2280387058854)
-        pointToPosition(qatar)
+        mMap.uiSettings.isZoomControlsEnabled = true
+        mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(activity, R.raw.map_dark_mood));
+        val cairo = LatLng(30.033333, 31.233334)
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(cairo));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(14f), 1000, null)
+
+        val source = LatLng(31.490127, 74.316971)
+        val destination = LatLng(31.474316, 74.316112)
+
     }
+
 
     private fun pointToPosition(position: LatLng) {
         val cameraPosition = CameraPosition.Builder()
@@ -70,12 +83,29 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         binding.drawerLayout.openDrawer(GravityCompat.START)
     }
 
+    private fun openDialog() {
+        findNavController().navigate(R.id.action_home_fragment_to_dialog_fragment)
+    }
+
+
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         binding.drawerLayout.close()
         val navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
         return (NavigationUI.onNavDestinationSelected(menuItem, navController)
                 || super.onOptionsItemSelected(menuItem))
     }
+
+    override fun onPolylineClick(p0: Polyline?) {
+        val polyline1 = mMap.addPolyline(
+            PolylineOptions()
+                .clickable(true)
+                .add(
+                    LatLng(-35.016, 143.321),
+                    LatLng(-34.747, 145.592)
+                )
+        )
+    }
+
 
 
 }

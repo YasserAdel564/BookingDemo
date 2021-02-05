@@ -9,7 +9,10 @@
     <color name="colorSecondaryWhite">#FFFFFFE6</color>
     <color name="colorDarkGray">#808080</color>
     <color name="colorSecondaryGray">#7E7E7E</color>
-    <color name="colorLightGray">#4B4B4B73</color>
+    <color name="colorLightGray">#EDEDF1</color>
     <color name="colorDarkBackground">#191919</color>
     <color name="colorGrayLight">#c8595959</color>
+    <color name="colorGreen">#73C611</color>
+    <color name="colorRed">#E42F22</color>
+
 </resources>

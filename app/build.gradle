@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -87,6 +88,8 @@ dependencies {
     implementation "com.airbnb.android:lottie:$lottie"
     implementation "com.google.android.gms:play-services-maps:$gMaps"
     implementation "de.hdodenhof:circleimageview:$circle_image"
-
+    implementation "com.google.firebase:firebase-auth:$firebase_auth"
+    implementation "com.google.firebase:firebase-firestore:$firebase_firestore"
+    implementation "com.google.firebase:firebase-messaging:$firebase_messaging"
 }
 
