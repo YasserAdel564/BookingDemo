@@ -6,6 +6,8 @@ import android.animation.Keyframe
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.content.Context
+import android.location.Address
+import android.location.Geocoder
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.animation.PathInterpolatorCompat
@@ -69,5 +71,12 @@ fun Context.flashAnimation(view: View) {
     animatorSet2.playTogether(animatorSet1)
     animatorSet2.start()
 
+}
+
+fun Context.getLocationName(latitude: Double, longitude: Double): String? {
+    val addresses: List<Address>
+    val geocoder = Geocoder(this, Locale.getDefault())
+    addresses = geocoder.getFromLocation(latitude, longitude, 1)
+    return if (addresses.isNotEmpty()) addresses[0].getAddressLine(0) else this.getString(R.string.un_known_place)
 }
 

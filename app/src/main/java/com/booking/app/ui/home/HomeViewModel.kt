@@ -4,16 +4,15 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.NetworkUtils
+import com.booking.app.data.UserModel
 import com.booking.app.ui.BaseViewModel
 import com.booking.app.utils.Constants
 import com.booking.app.utils.MyUiStates
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class HomeViewModel : BaseViewModel() {
@@ -23,6 +22,9 @@ class HomeViewModel : BaseViewModel() {
     private var _uiState = MutableLiveData<MyUiStates>()
     val uiState: LiveData<MyUiStates>
         get() = _uiState
+
+
+    var requestModel: UserModel? = null
 
     public fun checkRequests(driverId: String) {
         if (NetworkUtils.isConnected()) {
@@ -38,16 +40,18 @@ class HomeViewModel : BaseViewModel() {
     private fun launchJob(driverId: String): Job {
         return scope.launch(dispatcherProvider.io) {
             withContext(dispatcherProvider.main) { _uiState.value = MyUiStates.Loading }
-            Constants.collection
-                .get()
-                .addOnSuccessListener { documents ->
-                    for (document in documents) {
-                        Log.e("Success", "${document.id} => ${document.data}")
+            Constants.collection.addSnapshotListener { snapshot, e ->
+                if (snapshot != null)
+                    for (document in snapshot.documents) {
+                        val request: UserModel = document.toObject(UserModel::class.java)!!
+                        if (request.drivers?.contains(driverId) == true) {
+                            requestModel = request
+                            _uiState.value = MyUiStates.Success
+                        }
                     }
-                }
-                .addOnFailureListener { exception ->
-                    Log.e("Error", "Error getting documents: ", exception)
-                }
+            }
+
+
         }
     }
 }
