@@ -7,8 +7,6 @@ Demo Booking is App For Booking  Cars with Map
 - [x] Kotlin Coroutines
 - [x] MVVM Architecture
 - [x] Firebase (Firestore)
-- [x] Repository Design Pattern
-- [x] DI(Hilt)
 - [x] View Binding
 - [x] Navigation Components
 - [x] Google Material Design
